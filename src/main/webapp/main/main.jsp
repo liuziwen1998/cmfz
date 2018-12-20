@@ -22,7 +22,9 @@
                 dataType: "json",
                 contextType: "application/json",
                 success: function (data) {
+                    console.log(data)
                     $.each(data, function (index, first) {
+                        console.log(first)
                         var c = "";
                         $.each(first.childrenlist, function (index2, second) {
                             c += "<div><a href='#' onclick=\"addTabs('" + second.title + "','" + second.url + "','" + second.iconcls + "')\" class='easyui-linkbutton' style='width: 100%;height: 27px;text-align: center;background-color:#F07CF0' data-options=\"iconCls:'icon-search'\">" + second.title + "</a></div>";

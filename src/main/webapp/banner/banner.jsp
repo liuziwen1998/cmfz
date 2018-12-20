@@ -5,7 +5,7 @@
             iconCls: 'icon-add',
             text: "添加",
             handler: function () {
-                alert('编辑按钮')
+                $("#dialogadd").dialog("open");
             }
         }, '-', {
             text: "修改",
@@ -27,7 +27,36 @@
             text: "删除",
             iconCls: 'icon-remove',
             handler: function () {
-                alert('帮助按钮')
+                /*var ids=[];
+                var rows=$("#dg").datagrid("getSelections");
+                if(rows.length==0){
+                    $.messager.alert("警告","您未选中！");
+                    $("#dg").datagrid("unselectAll");
+                    return false;
+                }
+                rows.forEach(function(row,i){
+                    ids.push(row.id);
+                    var index=$("#dg").datagrid("getRowIndex",row);
+                    $("#dg").datagrid("deleteRow",index);
+            });
+                $.ajax({
+                    type:"POST",
+                    url:"/banner/delete",
+                    data:"ids="+ids,
+                    dataType:"text",
+                    success:function(result){
+                        $("#dg").datagrid("reload");
+                    }
+                });*/
+                var row1 = $("#dg").edatagrid("getSelected");
+                if (row1 != null) {
+                    //编辑指定行
+                    var index1 = $("#dg").edatagrid("getRowIndex", row1);
+                    $("#dg").edatagrid("destroyRow", index1);
+                } else {
+                    alert("请先选中行")
+                }
+
             }
         }, '-', {
             text: "保存",
@@ -38,11 +67,26 @@
             }
         }]
 
+        $("#dialogadd").dialog({
+            closed : true,
+            title : '添加信息',
+            width : 200,
+            height : 350,
+            resizable : true,
+            collapsible : true,
+            maximizable : true,
+            href : "${pageContext.request.contextPath }/banner/add.jsp",
+            modal : true,
+            cache : false
+
+        });
+
 
         $("#dg").edatagrid({
             url: "${pageContext.request.contextPath}/banner/page",
             updateUrl: "${pageContext.request.contextPath}/banner/update",
             saveUrl:"${pageContext.request.contextPath}/banner/update",
+            destroyUrl:"${pageContext.request.contextPath}/banner/delete",
             columns: [[
                 {field: 'title', title: '名字', width: 100},
                 {
@@ -80,3 +124,4 @@
 </script>
 
 <table id="dg"></table>
+<div id="dialogadd"></div>

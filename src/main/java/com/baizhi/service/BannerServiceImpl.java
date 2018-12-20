@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 
@@ -29,5 +31,11 @@ public class BannerServiceImpl implements BannerService {
         bannerMapper.updateByPrimaryKey(banner);
     }
 
+    public  void insert(Banner banner){
+        bannerMapper.insert(banner);
+    }
+    public  void delete(Banner banner){
+        bannerMapper.delete(banner);
+    }
 
 }

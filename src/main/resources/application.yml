@@ -19,6 +19,10 @@ spring:
   jackson:
     date-format: yyyy-MM-dd
     time-zone: GMT+8
+  http:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 10MB
 mybatis:
   type-aliases-package: com.baizhi.entity
   mapper-locations: classpath:com/baizhi/mapper/*Mapper.xml
