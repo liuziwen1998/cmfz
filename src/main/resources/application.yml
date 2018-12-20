@@ -1,6 +1,10 @@
 server:
   port: 9999
   context-path: /cmfz
+  jsp-servlet:
+    init-parameters:
+      development: true
+
 spring:
   datasource:
     username: root
@@ -12,6 +16,9 @@ spring:
     view:
       prefix: /
       suffix: .jsp
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
 mybatis:
   type-aliases-package: com.baizhi.entity
   mapper-locations: classpath:com/baizhi/mapper/*Mapper.xml

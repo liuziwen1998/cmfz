@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.mapper.BannerMapper">
+    <resultMap id="c1" type="Banner">
+        <id column="id" property="id"></id>
+        <result column="title" property="title"></result>
+        <result column="img_path" property="imgPath"></result>
+        <result column="status" property="status"></result>
+        <result column="pub_date" property="pubDate"></result>
+        <result column="description" property="description"></result>
+    </resultMap>
+    <!-- 查总行数 -->
+    <select id="selectTotalCount" resultType="int">
+        select count(*) from banner
+    </select>
+    <!-- 当前页的数据 -->
+    <select id="selectByPage" resultMap="c1">
+        select * from banner order by id desc limit ${(curPage-1)*pageSize},${pageSize}
+    </select>
+
+</mapper>
