@@ -49,13 +49,24 @@
                     }
                 });*/
                 var row1 = $("#dg").edatagrid("getSelected");
+                var index1 = null;
                 if (row1 != null) {
                     //编辑指定行
-                    var index1 = $("#dg").edatagrid("getRowIndex", row1);
+                    index1 = $("#dg").edatagrid("getRowIndex", row1);
                     $("#dg").edatagrid("destroyRow", index1);
                 } else {
                     alert("请先选中行")
                 }
+
+                $.ajax({
+                    type: "POST",
+                    url: "${pageContext.request.contextPath }/banner/delete",
+                    data: "id=" + row1.id,
+                    dataType: "text",
+                    success: function (result) {
+                        $("#dg").datagrid("reload");
+                    }
+                });
 
             }
         }, '-', {
@@ -86,7 +97,7 @@
             url: "${pageContext.request.contextPath}/banner/page",
             updateUrl: "${pageContext.request.contextPath}/banner/update",
             saveUrl:"${pageContext.request.contextPath}/banner/update",
-            destroyUrl:"${pageContext.request.contextPath}/banner/delete",
+            /*destroyUrl:"/banner/delete",*/
             columns: [[
                 {field: 'title', title: '名字', width: 100},
                 {
