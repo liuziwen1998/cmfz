@@ -1,12 +1,23 @@
 package com.baizhi.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "chapter")
+
 public class Chapter implements Serializable {
+    @Id
     private Integer id;
     private String title;
     private String size;

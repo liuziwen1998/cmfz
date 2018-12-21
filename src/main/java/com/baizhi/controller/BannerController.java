@@ -24,6 +24,7 @@ public class BannerController {
     @RequestMapping("page")
     @ResponseBody
     public BannerPageDto queryByPage(int page, int rows){
+
         return bannerService.queryByPage(page, rows);
     }
 

@@ -2,27 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.baizhi.mapper.AlbumMapper">
     <resultMap id="res2" type="Album">
-        <id column="id" property="id"></id>
-        <result column="title" property="title"></result>
-        <result column="count" property="count"></result>
-        <result column="cover_img" property="coverImg"></result>
-        <result column="score" property="score"></result>
-        <result column="author" property="author"></result>
-        <result column="broadcast" property="broadcast"></result>
-        <result column="brief" property="brief"></result>
-        <result column="pub_date" property="pubDate"></result>
-        <collection property="chapterlist" ofType="Chapter">
-            <id column="id" property="id"/>
-            <result column="title" property="title"/>
-            <result column="size" property="size"/>
-            <result column="duration" property="duration"/>
-            <result column="url" property="url"/>
-            <result column="uploadDate" property="uploadDate"/>
-            <result column="album_id" property="albumId"/>
+        <id column="fid" property="id"/>
+        <result column="ftitle" property="title"/>
+        <result column="fcount" property="count"/>
+        <result column="fcover_img" property="coverImg"/>
+        <result column="fscore" property="score"/>
+        <result column="fauthor" property="author"/>
+        <result column="fbroadcast" property="broadcast"/>
+        <result column="fbrief" property="brief"/>
+        <result column="fpub_date" property="pubDate"/>
+        <collection property="children" ofType="Chapter">
+            <id column="cid" property="id"/>
+            <result column="ctitle" property="title"/>
+            <result column="csize" property="size"/>
+            <result column="cduration" property="duration"/>
+            <result column="curl" property="url"/>
+            <result column="cupload_date" property="uploadDate"/>
+            <result column="calbum_id" property="albumId"/>
         </collection>
-
-
     </resultMap>
+
+
+    <!-- 查总行数 -->
+    <select id="selectTotalCount" resultType="int">
+        select count(*)
+        from album f
+                 left join chapter c
+                           on f.id = c.album_id
+    </select>
+
+    <select id="selectByPage" resultMap="res2">
+        select f.id          fid,
+               f.title       ftitle,
+               f.count       fcount,
+               f.author      fauthor,
+               f.cover_img   fcover_img,
+               f.score       fscore,
+               f.broadcast   fbroadcast,
+               f.brief       fbrief,
+               f.pub_date    fpub_date,
+               c.id          cid,
+               c.title       ctitle,
+               c.size        csize,
+               c.duration    cduration,
+               c.url         curl,
+               c.upload_date cupload_date,
+               c.album_id    calbum_id
+        from album f
+                 left join chapter c
+                           on f.id = c.album_id
+        order by c.id desc limit ${(curPage-1)*pageSize},${pageSize}
+    </select>
 
 
 </mapper>
