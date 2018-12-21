@@ -67,6 +67,7 @@
 
 </script>
 
+
 <table id="album"></table>
 <div id="album_dialog" class="easyui-dialog" title="专辑详情" style="width:480px;height:380px;"
      data-options="iconCls:'icon-filter',resizable:true,modal:true,closed:true">
