@@ -27,6 +27,11 @@ public class AlbumServiceImpl implements AlbumService {
         return dto;
     }
 
+    @Override
+    public void insert(Album album) {
+        albumMapper.insert(album);
+    }
+
 
     public List<Album> queryAll() {
         List<Album> list = albumMapper.queryAll();

@@ -13,7 +13,7 @@
                     $("#album_dialog").dialog("open")
                     /*填充内容*/
                     $("#album_ff").form("load", row);
-                    $("#img").prop("src", "http://localhost:9999/" + row.newname);
+                    $("#img").prop("src", row.coverImg);
                 } else {
                     alert("请先选专辑！！！")
                 }
@@ -23,7 +23,7 @@
         text: "添加专辑",
         iconCls: 'icon-add',
         handler: function () {
-
+            $("#dialogalubmadd").dialog("open");
 
         }
     }, '-', {
@@ -62,6 +62,21 @@
         });
 
 
+        $("#dialogalubmadd").dialog({
+            closed: true,
+            title: '添加专辑',
+            width: 250,
+            height: 320,
+            resizable: true,
+            collapsible: true,
+            maximizable: true,
+            href: "${pageContext.request.contextPath }/album/addalbum.jsp",
+            modal: true,
+            cache: false
+
+        });
+
+
     })
 
 
@@ -74,22 +89,22 @@
     <form id="album_ff" method="post">
         <br/>
         <div>
-            <label for="name">名&nbsp;&nbsp;称:</label>
-            <input class="easyui-validatebox" id="name" type="text" name="title"/>
-            <label for="name">作&nbsp;&nbsp;者:</label>
+            <label for="title">名&nbsp;&nbsp;称:</label>
+            <input class="easyui-validatebox" id="title" type="text" name="title"/>
+            <label for="author">作&nbsp;&nbsp;者:</label>
             <input class="easyui-validatebox" id="author" type="text" name="author"/>
         </div>
         <br/>
         <div>
-            <label for="zhangjieshu">集&nbsp;&nbsp;数:</label>
-            <input class="easyui-validatebox" type="text" id="zhangjieshu" name="count"/>
-            <label for="boyinyuan">播音员:</label>
-            <input class="easyui-validatebox" type="text" id="boyinyuan" name="broadcast"/>
+            <label for="count">集&nbsp;&nbsp;数:</label>
+            <input class="easyui-validatebox" type="text" id="count" name="count"/>
+            <label for="broadcast">播音员:</label>
+            <input class="easyui-validatebox" type="text" id="broadcast" name="broadcast"/>
         </div>
         <br/>
         <div>
-            <label for="jianjie">简&nbsp;&nbsp;介:</label>
-            <input class="easyui-textbox" type="text" id="jianjie" name="brief" style="height:100px;width: 400px"
+            <label for="brief">简&nbsp;&nbsp;介:</label>
+            <input class="easyui-textbox" type="text" id="brief" name="brief" style="height:100px;width: 400px"
                    multiline="true"/>
         </div>
         <br/>
@@ -99,8 +114,9 @@
         </div>
         <br/>
         <div>
-            <label for="img">封&nbsp;&nbsp;面:</label>
-            <img id="img" src="" width="60px" height="80px">
+            <label for="coverImg">封&nbsp;&nbsp;面:</label>
+            <img id="coverImg" src="" width="60px" height="80px">
         </div>
     </form>
 </div>
+<div id="dialogalubmadd"></div>

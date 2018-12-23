@@ -9,7 +9,8 @@ import java.util.List;
 public interface AlbumMapper extends Mapper<Album> {
         public List<Album> queryAll();
 
-        //查数据的总行数
+
+    //查数据的总行数
         public Integer selectTotalCount();
 
         //查数据当页数据

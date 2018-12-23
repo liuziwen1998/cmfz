@@ -10,4 +10,6 @@ public interface AlbumService {
     public List<Album> queryAll();
 
     public AlbumPageDto queryByPage(int curPage, int pageSize);
+
+    void insert(Album album);
 }
