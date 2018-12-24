@@ -23,6 +23,30 @@
     </resultMap>
 
 
+    <select id="queryAll" resultMap="res2">
+        select f.id          fid,
+               f.title       ftitle,
+               f.count       fcount,
+               f.author      fauthor,
+               f.cover_img   fcover_img,
+               f.score       fscore,
+               f.broadcast   fbroadcast,
+               f.brief       fbrief,
+               f.pub_date    fpub_date,
+               c.id          cid,
+               c.title       ctitle,
+               c.size        csize,
+               c.duration    cduration,
+               c.url         curl,
+               c.upload_date cupload_date,
+               c.album_id    calbum_id
+        from album f
+                 left join chapter c
+                           on f.id = c.album_id
+
+    </select>
+
+
     <!-- 查总行数 -->
     <select id="selectTotalCount" resultType="int">
         select count(*)

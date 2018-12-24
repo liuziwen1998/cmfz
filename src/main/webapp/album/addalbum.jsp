@@ -39,7 +39,7 @@
                             title: "提示信息",
                             msg: "添加成功"
                         });
-                        $("#dg").datagrid("load");
+                        $("#dg").datagrid("reload");
                     }
                 });
             }
